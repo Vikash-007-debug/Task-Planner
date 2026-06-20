@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Planner - Timetable & Tasks</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Background Matrix Animation -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Login/Auth Overlay -->
+  <div id="auth-overlay" class="modal-backdrop active">
+    <div class="modal-container auth-modal" style="width: 100%; max-width: 440px; max-height: 85vh; overflow-y: auto; padding: 40px 32px; z-index: 10000; position: relative;">
+      <div class="brand-logo" style="margin: 0 auto 20px; display: flex;">
+        <i data-lucide="infinity"></i>
+      </div>
+      <div class="brand-header" style="text-align: center; margin-bottom: 24px;">
+        <h1 style="font-size: 24px;">Task Planner</h1>
+        <p class="subtitle" id="auth-subtitle">Sign in to sync your timetable</p>
+      </div>
+      
+      <form id="auth-form" onsubmit="handleAuth(event)">
+        <!-- Extra fields for Sign Up only -->
+        <div id="signup-fields" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="auth-name">Full Name</label>
+            <div class="input-wrapper">
+              <i data-lucide="user" class="input-icon"></i>
+              <input type="text" id="auth-name" class="form-input" placeholder="John Doe">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="auth-education">Education</label>
+            <div class="input-wrapper">
+              <i data-lucide="graduation-cap" class="input-icon"></i>
+              <input type="text" id="auth-education" class="form-input" placeholder="University Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="auth-work">Work / Role</label>
+            <div class="input-wrapper">
+              <i data-lucide="briefcase" class="input-icon"></i>
+              <input type="text" id="auth-work" class="form-input" placeholder="Software Engineer">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="auth-email">Email</label>
+          <div class="input-wrapper">
+            <i data-lucide="mail" class="input-icon"></i>
+            <input type="email" id="auth-email" class="form-input" required placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="auth-password">Password</label>
+          <div class="input-wrapper">
+            <i data-lucide="lock" class="input-icon"></i>
+            <input type="password" id="auth-password" class="form-input" required placeholder="••••••••">
+          </div>
+        </div>
+        <p id="auth-error" style="color: #ef4444; font-size: 13px; margin-top: -10px; margin-bottom: 10px; display: none;">Error message</p>
+        
+        <button type="submit" class="submit-btn" id="auth-submit-btn" style="margin-top: 10px;">
+          Sign In
+        </button>
+      </form>
+      
+      <div style="text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-secondary);">
+        <span id="auth-toggle-text">Don't have an account?</span> 
+        <a href="#" onclick="toggleAuthMode()" style="color: #ef4444; text-decoration: none; font-weight: 600;">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SVG Gradients Definition for Charts -->
+  <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ef4444" />
+        <stop offset="100%" stop-color="#be123c" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- MAIN DASHBOARD APP CONTAINER -->
+  <div id="app-container" class="app-container">
+    
+    <!-- SIDEBAR -->
+    <aside>
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <i data-lucide="calendar-check-2" style="width: 20px; height: 20px;"></i>
+        </div>
+        <span class="logo-text">Task Planner</span>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a class="nav-link active" onclick="switchTab('overview')" id="nav-overview">
+            <i data-lucide="layout-dashboard"></i>
+            <span class="nav-text">Overview</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="switchTab('weekly')" id="nav-weekly">
+            <i data-lucide="calendar-range"></i>
+            <span class="nav-text">Weekly Plan</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="switchTab('monthly')" id="nav-monthly">
+            <i data-lucide="calendar-days"></i>
+            <span class="nav-text">Monthly Plan</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="switchTab('yearly')" id="nav-yearly">
+            <i data-lucide="calendar"></i>
+            <span class="nav-text">Yearly Plan</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="toggleTheme()" id="theme-toggle">
+            <i data-lucide="sun" id="theme-icon"></i>
+            <span class="nav-text" id="theme-text">Light Mode</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Profile Badge at the bottom -->
+      <div class="user-profile-badge">
+        <div class="user-info">
+          <div class="avatar" id="profile-avatar">U</div>
+          <div class="details">
+            <div class="user-name" id="profile-name">User Name</div>
+            <div class="user-meta" id="profile-role">Education / Work</div>
+          </div>
+        </div>
+        <div class="profile-actions">
+          <button class="mini-btn" onclick="openProfileModal()">
+            <i data-lucide="edit-3" style="width: 12px; height: 12px;"></i> Edit
+          </button>
+          <button class="mini-btn" onclick="handleLogout()">
+            <i data-lucide="log-out" style="width: 12px; height: 12px;"></i> Logout
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEW AREA -->
+    <main>
+      
+      <!-- OVERVIEW TAB -->
+      <section id="view-overview" class="view-section active">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>Welcome Back!</h2>
+            <p>Here is a summary of your schedule and upcoming milestones.</p>
+          </div>
+          <button class="btn-primary" onclick="openAddTaskModal()">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Add New Task
+          </button>
+        </div>
+
+        <!-- Overview stats -->
+        <div class="overview-stats">
+          <div class="stat-card">
+            <div class="stat-content">
+              <div class="stat-title">Tasks Completed</div>
+              <div class="stat-value" id="stats-completed">0/0</div>
+            </div>
+            <div class="stat-icon">
+              <i data-lucide="check-circle-2"></i>
+            </div>
+          </div>
+          <div class="stat-card accent-purple">
+            <div class="stat-content">
+              <div class="stat-title">Tasks Pending</div>
+              <div class="stat-value" id="stats-pending">0</div>
+            </div>
+            <div class="stat-icon">
+              <i data-lucide="clock-4"></i>
+            </div>
+          </div>
+          <div class="stat-card accent-teal">
+            <div class="stat-content">
+              <div class="stat-title">Completion Rate</div>
+              <div class="stat-value" id="stats-rate-pct">0%</div>
+            </div>
+            <div class="stat-chart">
+              <svg width="50" height="50" viewBox="0 0 36 36">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path class="circle-progress" id="overview-progress-ring" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+              <div class="chart-text" id="stats-pct-label">0%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main overview grid -->
+        <div class="overview-grid">
+          <!-- Upcoming tasks lists -->
+          <div class="overview-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i data-lucide="list-todo" style="color: var(--primary);"></i>
+                Upcoming Tasks (Next 7 Days)
+              </div>
+            </div>
+            <div id="overview-upcoming-tasks" class="tasks-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Profile Details Card -->
+          <div class="overview-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i data-lucide="id-card" style="color: var(--accent);"></i>
+                My Profile Card
+              </div>
+            </div>
+            <div class="mini-profile-card">
+              <div class="large-avatar" id="overview-avatar">U</div>
+              <div class="profile-field-group">
+                <div class="profile-field-label">Name</div>
+                <div class="profile-field-value" id="overview-name">User Name</div>
+              </div>
+              <div class="profile-field-group">
+                <div class="profile-field-label">Education</div>
+                <div class="profile-field-value" id="overview-education">Education Details</div>
+              </div>
+              <div class="profile-field-group">
+                <div class="profile-field-label">Work / Role</div>
+                <div class="profile-field-value" id="overview-work">Work details</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WEEKLY PLAN TAB -->
+      <section id="view-weekly" class="view-section">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>Weekly Timetable</h2>
+            <p id="weekly-range-label">Date Range Label</p>
+          </div>
+          <div class="header-controls">
+            <button class="picker-btn" onclick="navigateWeek(-1)">
+              <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i>
+            </button>
+            <button class="picker-btn" onclick="setWeekToToday()">Today</button>
+            <button class="picker-btn" onclick="navigateWeek(1)">
+              <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i>
+            </button>
+            <button class="btn-primary" onclick="openAddTaskModal()">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Add Task
+            </button>
+          </div>
+        </div>
+
+        <div class="weekly-container" id="weekly-calendar-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- MONTHLY PLAN TAB -->
+      <section id="view-monthly" class="view-section">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>Monthly Calendar</h2>
+            <p>Plan out your month and see your workload at a glance.</p>
+          </div>
+          <div class="header-controls">
+            <!-- Year Selection button dropdown -->
+            <div class="picker-btn">
+              <i data-lucide="calendar" style="width: 14px; height: 14px;"></i>
+              <select id="monthly-year-select" onchange="onMonthlyNavigationChange()">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+            <!-- Month Selection button dropdown -->
+            <div class="picker-btn">
+              <i data-lucide="calendar-days" style="width: 14px; height: 14px;"></i>
+              <select id="monthly-month-select" onchange="onMonthlyNavigationChange()">
+                <option value="0">January</option>
+                <option value="1">February</option>
+                <option value="2">March</option>
+                <option value="3">April</option>
+                <option value="4">May</option>
+                <option value="5">June</option>
+                <option value="6">July</option>
+                <option value="7">August</option>
+                <option value="8">September</option>
+                <option value="9">October</option>
+                <option value="10">November</option>
+                <option value="11">December</option>
+              </select>
+            </div>
+            <button class="picker-btn" onclick="setMonthToToday()">Today</button>
+            <button class="btn-primary" onclick="openAddTaskModal()">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Add Task
+            </button>
+          </div>
+        </div>
+
+        <!-- Month calendar board -->
+        <div class="calendar-grid-container">
+          <div class="calendar-grid" id="monthly-calendar-grid">
+            <!-- Grid structure with days populated via javascript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- YEARLY PLAN TAB -->
+      <section id="view-yearly" class="view-section">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>Yearly Roadmap</h2>
+            <p>Select a year and see a comprehensive dashboard of your annual plans.</p>
+          </div>
+          <div class="header-controls">
+            <!-- Year Selection button dropdown -->
+            <div class="picker-btn">
+              <i data-lucide="calendar" style="width: 14px; height: 14px;"></i>
+              <select id="yearly-year-select" onchange="onYearlyNavigationChange()">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+            <button class="picker-btn" onclick="setYearToToday()">Current Year</button>
+            <button class="btn-primary" onclick="openAddTaskModal()">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Add Task
+            </button>
+          </div>
+        </div>
+
+        <div class="yearly-grid" id="yearly-roadmap-grid">
+          <!-- 12 months dynamically rendered as miniature calendars -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ADD / EDIT TASK MODAL -->
+  <div id="task-modal" class="modal-backdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="task-modal-title">Create New Task</h3>
+        <button class="close-modal-btn" onclick="closeTaskModal()">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <form id="task-form" onsubmit="saveTask(event)">
+        <input type="hidden" id="task-id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="task-text-input">Task Details</label>
+            <div class="input-wrapper">
+              <i data-lucide="edit-3" class="input-icon"></i>
+              <input type="text" id="task-text-input" class="form-input" placeholder="e.g. Prep for system design interview" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="task-date-input">Select Date</label>
+            <div class="input-wrapper">
+              <i data-lucide="calendar" class="input-icon"></i>
+              <input type="date" id="task-date-input" class="form-input" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Priority</label>
+            <div class="priority-selector">
+              <div class="priority-option">
+                <input type="radio" name="priority" id="p-low" value="low" checked>
+                <label for="p-low" class="priority-label">Low</label>
+              </div>
+              <div class="priority-option">
+                <input type="radio" name="priority" id="p-medium" value="medium">
+                <label for="p-medium" class="priority-label">Medium</label>
+              </div>
+              <div class="priority-option">
+                <input type="radio" name="priority" id="p-high" value="high">
+                <label for="p-high" class="priority-label">High</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeTaskModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PROFILE EDIT MODAL -->
+  <div id="profile-modal" class="modal-backdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Edit Profile</h3>
+        <button class="close-modal-btn" onclick="closeProfileModal()">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <form id="profile-form" onsubmit="saveProfile(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="edit-username">Full Name</label>
+            <div class="input-wrapper">
+              <i data-lucide="user" class="input-icon"></i>
+              <input type="text" id="edit-username" class="form-input" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-education">Education</label>
+            <div class="input-wrapper">
+              <i data-lucide="graduation-cap" class="input-icon"></i>
+              <input type="text" id="edit-education" class="form-input" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-work">Work / Role</label>
+            <div class="input-wrapper">
+              <i data-lucide="briefcase" class="input-icon"></i>
+              <input type="text" id="edit-work" class="form-input" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeProfileModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  
+  <script src="firebase-config.js"></script>
+  <script src="matrix.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
