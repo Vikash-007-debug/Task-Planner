@@ -1,11 +1,12 @@
 // Firebase Configuration (REPLACE THESE WITH YOUR ACTUAL FIREBASE KEYS)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBKXNW2g4vEXSEhtAu-vWJWI_ff_7gPsQs",
+  authDomain: "task-planner-6bb12.firebaseapp.com",
+  projectId: "task-planner-6bb12",
+  storageBucket: "task-planner-6bb12.firebasestorage.app",
+  messagingSenderId: "70120467440",
+  appId: "1:70120467440:web:7e333c7304710312734b35",
+  measurementId: "G-JFJ15EZRG0"
 };
 
 // Initialize Firebase
@@ -38,7 +39,7 @@ function handleAuth(e) {
   const password = document.getElementById('auth-password').value;
   const errorElement = document.getElementById('auth-error');
   const submitBtn = document.getElementById('auth-submit-btn');
-  
+
   errorElement.style.display = 'none';
 
   if (!auth) {
@@ -91,7 +92,7 @@ if (auth) {
       // User is signed in
       currentUser = user;
       document.getElementById('auth-overlay').classList.remove('active');
-      
+
       // Load user's data from Firestore
       loadDataFromFirestore();
     } else {
@@ -111,11 +112,11 @@ function logout() {
 // Database Operations
 async function loadDataFromFirestore() {
   if (!db || !currentUser) return;
-  
+
   try {
     const docRef = db.collection('users').doc(currentUser.uid);
     const docSnap = await docRef.get();
-    
+
     if (docSnap.exists) {
       const data = docSnap.data();
       if (data.profile) state.profile = data.profile;
@@ -125,14 +126,14 @@ async function loadDataFromFirestore() {
       loadData(); // This loads the mock data from app.js if local tasks are empty
       saveToFirestore();
     }
-    
+
     // Update UI
     if (state.profile) {
       document.getElementById('profile-name').textContent = state.profile.name || 'User';
       document.getElementById('profile-role').textContent = state.profile.work || 'Student';
     }
     renderOverview();
-    
+
   } catch (error) {
     console.error("Error loading data:", error);
   }
@@ -140,7 +141,7 @@ async function loadDataFromFirestore() {
 
 async function saveToFirestore() {
   if (!db || !currentUser) return;
-  
+
   try {
     await db.collection('users').doc(currentUser.uid).set({
       profile: state.profile || null,
