@@ -231,6 +231,7 @@ body.light-theme.one-piece-theme aside {
   --text-primary: #fefce8;
   --text-secondary: #fef08a;
   --text-muted: #a1a1aa;
+  --active-nav-text: #000000;
 }
 
 /* Reset and Core Styles */
