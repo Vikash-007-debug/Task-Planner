@@ -701,12 +701,12 @@ function toggleOnePieceTheme() {
   
   if (isOnePiece) {
     if (avatar) {
-      avatar.style.transform = 'scale(1.05) rotate(-5deg)';
-      avatar.style.filter = 'drop-shadow(0 0 20px #facc15)';
+      avatar.style.transform = 'scale(1.0) rotate(-5deg)';
+      avatar.style.filter = 'drop-shadow(0 0 10px rgba(250, 204, 21, 0.5))';
     }
   } else {
     if (avatar) {
-      avatar.style.transform = 'scale(0.95) rotate(0deg)';
+      avatar.style.transform = 'scale(0.9) rotate(0deg)';
       avatar.style.filter = 'none';
     }
   }

@@ -375,9 +375,7 @@ h1, h2, h3, h4, h5, h6 {
 .brand-header h1 {
   font-size: 28px;
   margin-bottom: 8px;
-  background: linear-gradient(to right, var(--text-primary), var(--text-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
 }
 
 .brand-header p {
@@ -560,9 +558,7 @@ aside {
   font-size: 19px;
   font-weight: 800;
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
 }
 
 .nav-menu {
@@ -1784,6 +1780,7 @@ main {
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.04em;
+  color: var(--text-primary);
 }
 .landing-nav-actions {
   display: flex;
