@@ -85,6 +85,34 @@ function showAuthError(message) {
   errorElement.style.display = 'block';
 }
 
+function handleGoogleAuth() {
+  if (!auth) {
+    showAuthError("Firebase keys are missing! Please configure firebase-config.js first.");
+    return;
+  }
+  
+  if (firebaseConfig.apiKey === "YOUR_API_KEY") {
+    showAuthError("You haven't added your Firebase keys yet! Please open firebase-config.js and replace the placeholder text with your real Firebase Configuration.");
+    return;
+  }
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+  
+  auth.signInWithPopup(provider)
+    .then((result) => {
+      if (!state.profile || !state.profile.name) {
+        state.profile = {
+          name: result.user.displayName || "New User",
+          education: "",
+          work: ""
+        };
+      }
+    })
+    .catch((error) => {
+      showAuthError(error.message);
+    });
+}
+
 // Global Auth State Observer
 if (auth) {
   auth.onAuthStateChanged(user => {
