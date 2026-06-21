@@ -242,6 +242,9 @@ function renderOverview() {
       container.appendChild(item);
     });
   }
+  
+  // Re-initialize Lucide icons for the newly injected HTML
+  lucide.createIcons();
 }
 
 // Escape HTML utility
