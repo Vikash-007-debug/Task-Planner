@@ -115,23 +115,21 @@ body.one-piece-theme .straw-hat-crew-banner {
 
 .straw-hat-crew-banner {
   display: none;
-  width: 100%;
-  margin-top: 30px;
+  width: calc(100% + 96px);
+  margin-left: -48px;
+  margin-right: -48px;
+  margin-bottom: -40px;
+  margin-top: 60px;
   position: relative;
   text-align: center;
 }
 
 .straw-hat-crew-banner img {
   width: 100%;
-  max-height: 350px;
-  object-fit: contain;
-  mix-blend-mode: screen; /* Makes the black background completely transparent */
+  height: auto;
+  max-height: 450px;
+  object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
-}
-
-.straw-hat-crew-banner:hover img {
-  transform: scale(1.03);
 }
 
 body.light-theme {
