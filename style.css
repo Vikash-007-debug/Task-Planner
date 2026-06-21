@@ -2,19 +2,19 @@
 
 /* THEME SYSTEM VARIABLES */
 :root {
-  /* DARK MODE: DEEP FROZEN GLACIER ICE */
-  --bg-color: #020617; /* deep glacial water */
-  --bg-dots: rgba(200, 240, 255, 0.04);
-  --panel-bg: rgba(200, 235, 255, 0.12); /* thick milky ice tint */
-  --panel-border: rgba(200, 235, 255, 0.15);
-  --panel-border-hover: rgba(200, 235, 255, 0.3);
+  /* DARK MODE: RED & BLACK WITH TRANSLUCENT SHADES */
+  --bg-color: #000000;
+  --bg-dots: rgba(239, 68, 68, 0.03);
+  --panel-bg: rgba(10, 4, 4, 0.45); /* translucent black glass */
+  --panel-border: rgba(239, 68, 68, 0.18);
+  --panel-border-hover: rgba(239, 68, 68, 0.35);
   
   /* Sidebar transparency & gloss variables */
-  --sidebar-bg-color: rgba(200, 235, 255, 0.08);
+  --sidebar-bg-color: rgba(5, 2, 2, 0.35);
 
-  /* Translucent Thick Frosted Ice (Matte, Not Shiny) */
-  --panel-glare: linear-gradient(135deg, rgba(200, 235, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
-  --inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(200, 235, 255, 0.05);
+  /* Glossy reflections & glares */
+  --panel-glare: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(255, 255, 255, 0) 70%);
+  --inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
 
   --primary-glow: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.12) 0%, transparent 60%);
   --secondary-glow: radial-gradient(circle at 80% 20%, rgba(220, 38, 38, 0.08) 0%, transparent 50%);
@@ -81,18 +81,18 @@
 }
 
 body.one-piece-theme {
-  /* ONE PIECE THEME: DEEP FROZEN ICE */
-  --bg-color: #020617; /* deep glacial water */
+  /* ONE PIECE THEME: PIRATE NAVY, JOLLY ROGER WHITE & GOLD */
+  --bg-color: #050b14;
   --bg-dots: rgba(250, 204, 21, 0.05); /* subtle gold dots */
-  --panel-bg: rgba(200, 235, 255, 0.15); /* thick milky ice tint */
+  --panel-bg: rgba(14, 23, 38, 0.7); /* translucent navy */
   --panel-border: rgba(250, 204, 21, 0.2);
   --panel-border-hover: rgba(250, 204, 21, 0.45);
   
-  --sidebar-bg-color: rgba(200, 235, 255, 0.08);
+  --sidebar-bg-color: rgba(9, 16, 28, 0.75);
 
-  /* Translucent Thick Frosted Ice (Matte, Not Shiny) */
-  --panel-glare: linear-gradient(135deg, rgba(200, 235, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
-  --inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 0 15px rgba(200, 235, 255, 0.05);
+  /* Glossy reflections & glares */
+  --panel-glare: linear-gradient(135deg, rgba(250, 204, 21, 0.15) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0) 70%);
+  --inner-shadow: inset 0 1px 1px rgba(250, 204, 21, 0.15);
 
   --primary-glow: radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.1) 0%, transparent 60%);
   --secondary-glow: radial-gradient(circle at 80% 20%, rgba(220, 38, 38, 0.1) 0%, transparent 50%);
@@ -144,9 +144,9 @@ body.light-theme {
   /* Sidebar transparency & gloss variables in light theme */
   --sidebar-bg-color: rgba(254, 230, 230, 0.35);
 
-  /* Bright Frost Ice Glare */
-  --panel-glare: linear-gradient(110deg, rgba(255, 255, 255, 0.8) 0%, rgba(200, 240, 255, 0.4) 15%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.5) 25%, rgba(255, 255, 255, 0) 30%, rgba(200, 240, 255, 0.2) 80%, rgba(255, 255, 255, 0.8) 100%);
-  --inner-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.9), inset 0 0 15px rgba(255, 255, 255, 0.5);
+  /* Glossy reflections & glares */
+  --panel-glare: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 70%);
+  --inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6);
 
   --primary-glow: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.08) 0%, transparent 60%);
   --secondary-glow: radial-gradient(circle at 80% 20%, rgba(244, 63, 94, 0.06) 0%, transparent 50%);
@@ -208,18 +208,18 @@ body.light-theme .brand-logo svg {
 }
 
 body.light-theme.one-piece-theme {
-  /* ONE PIECE LIGHT THEME: DEEP FROZEN ICE */
-  --bg-color: #e0f2fe; /* sky ice blue */
+  /* ONE PIECE LIGHT THEME: PARCHMENT, STRAW HAT GOLD & LUFFY RED */
+  --bg-color: #fef3c7; /* parchment/sand */
   --bg-dots: rgba(220, 38, 38, 0.05);
-  --panel-bg: rgba(255, 255, 255, 0.65); /* thick milky ice tint */
-  --panel-border: rgba(186, 230, 253, 0.5); /* ice blue border */
-  --panel-border-hover: rgba(186, 230, 253, 0.8);
+  --panel-bg: rgba(139, 69, 19, 0.25); /* glossy brown shade */
+  --panel-border: rgba(139, 69, 19, 0.4);
+  --panel-border-hover: rgba(139, 69, 19, 0.7);
   
   --sidebar-bg-color: #050b14; /* Keep sidebar dark pirate navy so Jolly Roger screen blending works */
 
-  /* Translucent Frosted Ice (Matte, Not Shiny) */
-  --panel-glare: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.02) 100%);
-  --inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.1);
+  /* Glossy reflections & glares */
+  --panel-glare: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0) 70%);
+  --inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8);
 
   --primary-glow: radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.1) 0%, transparent 60%);
   --secondary-glow: radial-gradient(circle at 80% 20%, rgba(202, 138, 4, 0.1) 0%, transparent 50%);
