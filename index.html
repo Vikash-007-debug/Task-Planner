@@ -14,14 +14,12 @@
 
   <!-- Login/Auth Overlay (Hidden by default) -->
   <div id="auth-overlay" class="modal-backdrop">
-    <div class="modal-container auth-modal spiderman-theme" style="width: 100%; max-width: 440px; max-height: 85vh; overflow-y: auto; padding: 40px 32px; z-index: 10000; position: relative;">
+    <div class="modal-container auth-modal" style="width: 100%; max-width: 440px; max-height: 85vh; overflow-y: auto; padding: 40px 32px; z-index: 10000; position: relative;">
       <button onclick="closeAuthModal()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-secondary); cursor: pointer; z-index: 10;">
         <i data-lucide="x"></i>
       </button>
       <div class="brand-logo" style="margin: 0 auto 20px; display: flex; z-index: 10; position: relative;">
-        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #e23636;">
-          <path d="M12 4c-2 0-3 2-3 4 0 2 1 3 3 3s3-1 3-3c0-2-1-4-3-4z"/><path d="M12 11c-3 0-5 3-5 6s2 5 5 5 5-2 5-5-2-6-5-6z"/><path d="M8 8H4L2 5"/><path d="M16 8h4l2-3"/><path d="M7 13H2l-1 3"/><path d="M17 13h5l1 3"/><path d="M8 18H3l-1 4"/><path d="M16 18h5l1 4"/>
-        </svg>
+        <i data-lucide="infinity"></i>
       </div>
       <div class="brand-header" style="text-align: center; margin-bottom: 24px;">
         <h1 style="font-size: 24px;">Task Planner</h1>
@@ -159,12 +157,10 @@
   <div id="app-container" class="app-container">
     
     <!-- SIDEBAR -->
-    <aside class="spiderman-theme">
+    <aside>
       <div class="sidebar-header">
         <div class="logo-icon">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #e23636;">
-            <path d="M12 4c-2 0-3 2-3 4 0 2 1 3 3 3s3-1 3-3c0-2-1-4-3-4z"/><path d="M12 11c-3 0-5 3-5 6s2 5 5 5 5-2 5-5-2-6-5-6z"/><path d="M8 8H4L2 5"/><path d="M16 8h4l2-3"/><path d="M7 13H2l-1 3"/><path d="M17 13h5l1 3"/><path d="M8 18H3l-1 4"/><path d="M16 18h5l1 4"/>
-          </svg>
+          <i data-lucide="infinity" style="width: 20px; height: 20px; color: #ef4444;"></i>
         </div>
         <span class="logo-text">Task Planner</span>
       </div>
