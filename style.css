@@ -199,6 +199,40 @@ body.light-theme {
   --shadow-lg: 0 20px 40px -10px rgba(239, 68, 68, 0.16);
 }
 
+body.light-theme.one-piece-theme {
+  /* ONE PIECE LIGHT THEME: PARCHMENT, STRAW HAT GOLD & LUFFY RED */
+  --bg-color: #fef3c7; /* parchment/sand */
+  --bg-dots: rgba(220, 38, 38, 0.05);
+  --panel-bg: rgba(255, 255, 255, 0.6);
+  --panel-border: rgba(202, 138, 4, 0.3);
+  --panel-border-hover: rgba(202, 138, 4, 0.6);
+  
+  --sidebar-bg-color: #050b14; /* Keep sidebar dark pirate navy so Jolly Roger screen blending works */
+
+  --panel-glare: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0) 70%);
+  --inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8);
+
+  --primary-glow: radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.1) 0%, transparent 60%);
+  --secondary-glow: radial-gradient(circle at 80% 20%, rgba(202, 138, 4, 0.1) 0%, transparent 50%);
+
+  --primary: #dc2626; /* luffy red */
+  --primary-hover: #b91c1c;
+  --primary-gradient: linear-gradient(135deg, rgba(220, 38, 38, 0.8) 0%, rgba(185, 28, 28, 0.8) 100%);
+  
+  --accent: #ca8a04; /* darker gold */
+  --accent-gradient: linear-gradient(135deg, rgba(202, 138, 4, 0.8) 0%, rgba(161, 98, 7, 0.8) 100%);
+  
+  --text-primary: #451a03; /* dark brown */
+  --text-secondary: #78350f; 
+  --text-muted: #92400e;
+}
+
+body.light-theme.one-piece-theme aside {
+  --text-primary: #fefce8;
+  --text-secondary: #fef08a;
+  --text-muted: #a1a1aa;
+}
+
 /* Reset and Core Styles */
 * {
   box-sizing: border-box;
