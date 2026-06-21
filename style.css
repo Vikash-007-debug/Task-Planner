@@ -109,28 +109,35 @@ body.one-piece-theme {
   --text-muted: #a1a1aa;
 }
 
-body.one-piece-theme .straw-hat-crew-banner {
-  display: block;
+body.one-piece-theme .straw-hat-gallery {
+  display: flex;
   animation: slideUpFade var(--transition-slow) forwards;
 }
 
-.straw-hat-crew-banner {
+.straw-hat-gallery {
   display: none;
-  width: calc(100% + 96px);
-  margin-left: -48px;
-  margin-right: -48px;
-  margin-bottom: -40px;
-  margin-top: 60px;
-  position: relative;
-  text-align: center;
+  width: 100%;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-end; /* Align feet to bottom */
 }
 
-.straw-hat-crew-banner img {
-  width: 100%;
+.straw-hat-gallery img {
+  width: 18%; /* Fits 5 per row comfortably */
+  max-width: 160px;
   height: auto;
-  max-height: 450px;
-  object-fit: cover;
-  display: block;
+  max-height: 200px;
+  object-fit: contain;
+  transition: transform var(--transition-normal), filter var(--transition-normal);
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+  cursor: pointer;
+}
+
+.straw-hat-gallery img:hover {
+  transform: scale(1.15) translateY(-10px);
+  filter: drop-shadow(0 15px 25px rgba(250, 204, 21, 0.4));
 }
 
 body.light-theme {
