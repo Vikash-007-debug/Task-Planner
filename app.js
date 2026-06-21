@@ -21,31 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Load mock data if Firestore is empty
 function loadData() {
-  // We no longer load from localStorage. If Firestore is empty, initialize mock data.
-    // Inject mock onboarding tasks so the user sees a styled calendar immediately
-    state.tasks = [
-      {
-        id: 'mock-1',
-        text: 'Finish writing project report',
-        date: getLocalDateString(new Date()),
-        priority: 'high',
-        completed: false
-      },
-      {
-        id: 'mock-2',
-        text: 'Weekly team Sync meeting',
-        date: getLocalDateString(new Date()),
-        priority: 'medium',
-        completed: true
-      },
-      {
-        id: 'mock-3',
-        text: 'Select yearly courses',
-        date: getLocalDateString(new Date(Date.now() + 86400000 * 2)), // 2 days from now
-        priority: 'low',
-        completed: false
-      }
-    ];
+    state.tasks = [];
     saveTasksToLocalStorage();
 }
 
