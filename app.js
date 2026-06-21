@@ -697,7 +697,7 @@ function toggleOnePieceTheme() {
   
   // Create a cool transition effect
   const isOnePiece = document.body.classList.contains('one-piece-theme');
-  const avatar = document.getElementById('luffy-avatar');
+  const avatar = document.getElementById('jolly-roger-avatar');
   
   if (isOnePiece) {
     if (avatar) {
