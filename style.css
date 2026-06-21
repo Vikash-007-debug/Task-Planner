@@ -108,6 +108,32 @@ body.one-piece-theme {
   --text-muted: #a1a1aa;
 }
 
+body.one-piece-theme .straw-hat-crew-banner {
+  display: block;
+  animation: slideUpFade var(--transition-slow) forwards;
+}
+
+.straw-hat-crew-banner {
+  display: none;
+  width: 100%;
+  margin-top: 30px;
+  position: relative;
+  text-align: center;
+}
+
+.straw-hat-crew-banner img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  mix-blend-mode: screen; /* Makes the black background completely transparent */
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.straw-hat-crew-banner:hover img {
+  transform: scale(1.03);
+}
+
 body.light-theme {
   /* LIGHT MODE: RED & WHITE WITH TRANSLUCENT SHADES & HIGHER RED SPECS */
   --bg-color: #ffffff;
