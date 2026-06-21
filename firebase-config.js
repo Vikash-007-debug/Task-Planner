@@ -92,21 +92,43 @@ if (auth) {
       // User is signed in
       currentUser = user;
       document.getElementById('auth-overlay').classList.remove('active');
-
+      document.getElementById('landing-page').classList.remove('active');
+      document.getElementById('app-container').classList.add('visible');
+      
       // Load user's data from Firestore
       loadDataFromFirestore();
     } else {
       // User is signed out
       currentUser = null;
-      document.getElementById('auth-overlay').classList.add('active');
+      document.getElementById('auth-overlay').classList.remove('active');
+      document.getElementById('landing-page').classList.add('active');
+      document.getElementById('app-container').classList.remove('visible');
+      
       state.tasks = []; // Clear local state
-      renderOverview();
+      if (typeof renderOverview === 'function') renderOverview();
     }
   });
 }
 
 function logout() {
   if (auth) auth.signOut();
+}
+
+function openAuthModal(isLogin) {
+  isLoginMode = isLogin;
+  
+  // Set correct text based on mode
+  document.getElementById('auth-subtitle').innerText = isLoginMode ? "Sign in to sync your timetable" : "Create an account to sync your timetable";
+  document.getElementById('auth-submit-btn').innerText = isLoginMode ? "Sign In" : "Sign Up";
+  document.getElementById('auth-toggle-text').innerText = isLoginMode ? "Don't have an account?" : "Already have an account?";
+  document.getElementById('signup-fields').style.display = isLoginMode ? 'none' : 'block';
+  document.getElementById('auth-error').style.display = 'none';
+  
+  document.getElementById('auth-overlay').classList.add('active');
+}
+
+function closeAuthModal() {
+  document.getElementById('auth-overlay').classList.remove('active');
 }
 
 // Database Operations

@@ -66,11 +66,11 @@ function saveTasksToLocalStorage() {
   }
 }
 
-// Check onboarding status and show the correct view
+// Initialize App controls
 function initApp() {
   const appContainerEl = document.getElementById('app-container');
-
-  appContainerEl.classList.add('visible');
+  
+  // Note: Visibility is handled by firebase-config.js onAuthStateChanged
   
   // Setup controls & dropdowns
   populateYearDropdowns();
@@ -687,15 +687,12 @@ function toggleTheme() {
 }
 
 function updateThemeUI(isLight) {
-  const themeText = document.getElementById('theme-text');
-  const themeIcon = document.getElementById('theme-icon');
-  
-  if (themeText) {
-    themeText.textContent = isLight ? 'Dark Mode' : 'Light Mode';
-  }
-  if (themeIcon) {
-    themeIcon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
-  }
+  document.querySelectorAll('.theme-text-node').forEach(el => {
+    el.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+  });
+  document.querySelectorAll('.theme-icon-node').forEach(el => {
+    el.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
+  });
   if (window.lucide) {
     lucide.createIcons();
   }

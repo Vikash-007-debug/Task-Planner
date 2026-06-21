@@ -12,9 +12,12 @@
   <!-- Background Matrix Animation -->
   <canvas id="matrix-canvas"></canvas>
 
-  <!-- Login/Auth Overlay -->
-  <div id="auth-overlay" class="modal-backdrop active">
+  <!-- Login/Auth Overlay (Hidden by default) -->
+  <div id="auth-overlay" class="modal-backdrop">
     <div class="modal-container auth-modal" style="width: 100%; max-width: 440px; max-height: 85vh; overflow-y: auto; padding: 40px 32px; z-index: 10000; position: relative;">
+      <button onclick="closeAuthModal()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-secondary); cursor: pointer;">
+        <i data-lucide="x"></i>
+      </button>
       <div class="brand-logo" style="margin: 0 auto 20px; display: flex;">
         <i data-lucide="infinity"></i>
       </div>
@@ -77,6 +80,69 @@
     </div>
   </div>
 
+  <!-- LANDING PAGE -->
+  <section id="landing-page" class="landing-page active">
+    <!-- Landing Nav -->
+    <nav class="landing-nav">
+      <div class="landing-logo">
+        <i data-lucide="infinity" style="color: #ef4444; margin-right: 8px;"></i>
+        <span>Task Planner</span>
+      </div>
+      <div class="landing-nav-actions">
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme" style="border:none; background:transparent; cursor:pointer; color:var(--text-primary); display:flex; align-items:center; padding: 8px;">
+          <i data-lucide="sun" class="theme-icon-node"></i>
+        </button>
+        <button class="btn-primary" onclick="openAuthModal(true)">Log In</button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="hero-content fade-in-up">
+        <h1 class="hero-title">Master Your Time.<br>Own Your Day.</h1>
+        <p class="hero-subtitle">The minimal, beautifully crafted planner designed for deep work. Seamlessly sync your timetable, track tasks, and achieve more.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="openAuthModal(true)" style="padding: 16px 32px; font-size: 16px;">
+            Log In
+            <i data-lucide="arrow-right" style="margin-left: 8px; width: 18px; height: 18px;"></i>
+          </button>
+        </div>
+      </div>
+      <div class="hero-graphic fade-in-up" style="animation-delay: 0.2s;">
+        <div class="glass-mockup floating-anim">
+          <div class="mockup-header">
+            <div class="mockup-dots"><span></span><span></span><span></span></div>
+            <div class="mockup-title">This Week</div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-task"><div class="mockup-check"></div><div class="mockup-line"></div></div>
+            <div class="mockup-task"><div class="mockup-check"></div><div class="mockup-line" style="width: 60%"></div></div>
+            <div class="mockup-task"><div class="mockup-check"></div><div class="mockup-line" style="width: 80%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section">
+      <div class="feature-card fade-in-up" style="animation-delay: 0.3s;">
+        <div class="feature-icon"><i data-lucide="calendar"></i></div>
+        <h3>Yearly & Monthly Views</h3>
+        <p>Zoom out to plan your entire year, or focus on the intricate details of your weekly timetable.</p>
+      </div>
+      <div class="feature-card fade-in-up" style="animation-delay: 0.4s;">
+        <div class="feature-icon"><i data-lucide="moon"></i></div>
+        <h3>Dark & Light Modes</h3>
+        <p>A beautifully crafted glass UI that adapts to your environment for comfortable planning day or night.</p>
+      </div>
+      <div class="feature-card fade-in-up" style="animation-delay: 0.5s;">
+        <div class="feature-icon"><i data-lucide="cloud"></i></div>
+        <h3>Seamless Sync</h3>
+        <p>Powered by real-time cloud storage. Access your tasks instantly from any device, securely.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- SVG Gradients Definition for Charts -->
   <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
     <defs>
@@ -126,8 +192,8 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" onclick="toggleTheme()" id="theme-toggle">
-            <i data-lucide="sun" id="theme-icon"></i>
-            <span class="nav-text" id="theme-text">Light Mode</span>
+            <i data-lucide="sun" id="theme-icon" class="theme-icon-node"></i>
+            <span class="nav-text theme-text-node" id="theme-text">Light Mode</span>
           </a>
         </li>
       </ul>
