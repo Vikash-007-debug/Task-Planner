@@ -690,3 +690,54 @@ document.addEventListener('mousemove', (e) => {
   document.body.style.setProperty('--mouse-x', e.clientX + 'px');
   document.body.style.setProperty('--mouse-y', e.clientY + 'px');
 });
+
+// --- LUFFY ATTACK LOGIC ---
+let isLuffyAttacking = false;
+
+function triggerLuffyAttack() {
+  if (isLuffyAttacking) return;
+  isLuffyAttacking = true;
+
+  // 1. Zoom in and prepare
+  const avatar = document.getElementById('luffy-avatar');
+  if (avatar) avatar.style.transform = 'scale(1.5) rotate(-15deg)';
+
+  // 2. King Kong Gun Impact! (Shake the whole app)
+  setTimeout(() => {
+    const appContainer = document.getElementById('app-container');
+    appContainer.classList.add('attack-shake');
+    
+    // Add the crack overlay if it doesn't exist
+    let crackOverlay = document.getElementById('crack-overlay');
+    if (!crackOverlay) {
+      crackOverlay = document.createElement('div');
+      crackOverlay.id = 'crack-overlay';
+      crackOverlay.innerHTML = '<div class="crack-lines"></div>';
+      document.body.appendChild(crackOverlay);
+    }
+    
+    // Show cracks and red flash
+    setTimeout(() => {
+      crackOverlay.classList.add('active');
+    }, 100);
+
+  }, 400);
+
+  // 3. Stop shaking after 1.5 seconds
+  setTimeout(() => {
+    const appContainer = document.getElementById('app-container');
+    appContainer.classList.remove('attack-shake');
+  }, 1900);
+
+  // 4. Fade everything back to normal after 3 seconds total
+  setTimeout(() => {
+    const crackOverlay = document.getElementById('crack-overlay');
+    if (crackOverlay) crackOverlay.classList.remove('active');
+    
+    if (avatar) avatar.style.transform = 'scale(1.15)';
+    
+    setTimeout(() => {
+      isLuffyAttacking = false;
+    }, 500); // Cooldown
+  }, 3000);
+}
