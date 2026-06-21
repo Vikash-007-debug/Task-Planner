@@ -12,9 +12,9 @@
   /* Sidebar transparency & gloss variables */
   --sidebar-bg-color: rgba(5, 2, 2, 0.35);
 
-  /* Frozen Ice Reflections & Glares */
-  --panel-glare: linear-gradient(110deg, rgba(255, 255, 255, 0.35) 0%, rgba(150, 230, 255, 0.08) 15%, transparent 20%, rgba(255, 255, 255, 0.15) 25%, transparent 30%, rgba(150, 230, 255, 0.05) 80%, rgba(255, 255, 255, 0.4) 100%);
-  --inner-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6), inset 0 0 12px rgba(150, 230, 255, 0.15);
+  /* Translucent Frosted Ice (Matte, Not Shiny) */
+  --panel-glare: linear-gradient(135deg, rgba(200, 230, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+  --inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 0 10px rgba(200, 230, 255, 0.03);
 
   --primary-glow: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.12) 0%, transparent 60%);
   --secondary-glow: radial-gradient(circle at 80% 20%, rgba(220, 38, 38, 0.08) 0%, transparent 50%);
@@ -198,6 +198,13 @@ body.light-theme {
   --shadow-sm: 0 2px 8px -1px rgba(239, 68, 68, 0.08);
   --shadow-md: 0 10px 25px -5px rgba(239, 68, 68, 0.12), 0 8px 16px -6px rgba(239, 68, 68, 0.12);
   --shadow-lg: 0 20px 40px -10px rgba(239, 68, 68, 0.16);
+}
+
+body.light-theme .landing-logo,
+body.light-theme .landing-logo i,
+body.light-theme .brand-logo,
+body.light-theme .brand-logo i {
+  color: #000000 !important;
 }
 
 body.light-theme.one-piece-theme {
