@@ -1932,3 +1932,28 @@ main {
   opacity: 1;
   transform: scale(1);
 }
+
+/* BREAKOUT AND SHATTER */
+.luffy-breakout {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 300px !important;
+  height: 300px !important;
+  transform: translate(-50%, -50%) scale(2.5) !important;
+  z-index: 999999 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.luffy-breakout img {
+  transform: scale(1) !important;
+  filter: drop-shadow(0 20px 50px rgba(255, 0, 0, 0.8)) !important;
+}
+
+.shatter-transition {
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease, filter 0.6s ease !important;
+}

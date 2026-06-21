@@ -698,16 +698,38 @@ function triggerLuffyAttack() {
   if (isLuffyAttacking) return;
   isLuffyAttacking = true;
 
-  // 1. Zoom in and prepare
+  const container = document.getElementById('luffy-container') || document.querySelector('[onclick="triggerLuffyAttack()"]');
   const avatar = document.getElementById('luffy-avatar');
-  if (avatar) avatar.style.transform = 'scale(1.5) rotate(-15deg)';
+  
+  // 1. Breakout!
+  if (container) container.classList.add('luffy-breakout');
+  
+  // 2. Select UI elements to shatter
+  const elementsToShatter = document.querySelectorAll('.glass-panel, .btn-primary, .btn-secondary, .nav-item, .view-section, .hero-section, .feature-card, .user-profile-badge, .sidebar-header, .nav-menu');
+  
+  elementsToShatter.forEach(el => {
+    el.classList.add('shatter-transition');
+  });
 
-  // 2. King Kong Gun Impact! (Shake the whole app)
+  // 3. King Kong Gun Impact!
   setTimeout(() => {
     const appContainer = document.getElementById('app-container');
-    appContainer.classList.add('attack-shake');
+    if(appContainer) appContainer.classList.add('attack-shake');
     
-    // Add the crack overlay if it doesn't exist
+    // Shatter the elements by applying random transforms
+    elementsToShatter.forEach(el => {
+      const rx = (Math.random() - 0.5) * 60; // rotateX
+      const ry = (Math.random() - 0.5) * 60; // rotateY
+      const rz = (Math.random() - 0.5) * 90; // rotateZ
+      const tx = (Math.random() - 0.5) * 800; // translateX
+      const ty = (Math.random() - 0.5) * 800; // translateY
+      
+      el.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`;
+      el.style.opacity = '0.3';
+      el.style.filter = 'drop-shadow(0 0 10px red)';
+    });
+
+    // Add the crack overlay
     let crackOverlay = document.getElementById('crack-overlay');
     if (!crackOverlay) {
       crackOverlay = document.createElement('div');
@@ -716,28 +738,37 @@ function triggerLuffyAttack() {
       document.body.appendChild(crackOverlay);
     }
     
-    // Show cracks and red flash
     setTimeout(() => {
       crackOverlay.classList.add('active');
-    }, 100);
+    }, 50);
 
   }, 400);
 
-  // 3. Stop shaking after 1.5 seconds
+  // 4. Stop shaking after 1.5 seconds
   setTimeout(() => {
     const appContainer = document.getElementById('app-container');
-    appContainer.classList.remove('attack-shake');
+    if(appContainer) appContainer.classList.remove('attack-shake');
   }, 1900);
 
-  // 4. Fade everything back to normal after 3 seconds total
+  // 5. Auto-Repair Sequence
   setTimeout(() => {
     const crackOverlay = document.getElementById('crack-overlay');
     if (crackOverlay) crackOverlay.classList.remove('active');
     
-    if (avatar) avatar.style.transform = 'scale(1.15)';
+    if (container) container.classList.remove('luffy-breakout');
+    
+    // Revert shattering
+    elementsToShatter.forEach(el => {
+      el.style.transform = '';
+      el.style.opacity = '';
+      el.style.filter = '';
+    });
     
     setTimeout(() => {
+      // Remove transition classes after repair is complete
+      elementsToShatter.forEach(el => el.classList.remove('shatter-transition'));
       isLuffyAttacking = false;
-    }, 500); // Cooldown
-  }, 3000);
+    }, 600); 
+
+  }, 3500);
 }
