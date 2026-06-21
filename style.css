@@ -203,9 +203,9 @@ body.light-theme.one-piece-theme {
   /* ONE PIECE LIGHT THEME: PARCHMENT, STRAW HAT GOLD & LUFFY RED */
   --bg-color: #fef3c7; /* parchment/sand */
   --bg-dots: rgba(220, 38, 38, 0.05);
-  --panel-bg: rgba(255, 255, 255, 0.6);
-  --panel-border: rgba(202, 138, 4, 0.3);
-  --panel-border-hover: rgba(202, 138, 4, 0.6);
+  --panel-bg: rgba(139, 69, 19, 0.25); /* glossy brown shade */
+  --panel-border: rgba(139, 69, 19, 0.4);
+  --panel-border-hover: rgba(139, 69, 19, 0.7);
   
   --sidebar-bg-color: #050b14; /* Keep sidebar dark pirate navy so Jolly Roger screen blending works */
 
