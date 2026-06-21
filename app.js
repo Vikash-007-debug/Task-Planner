@@ -690,3 +690,24 @@ document.addEventListener('mousemove', (e) => {
   document.body.style.setProperty('--mouse-x', e.clientX + 'px');
   document.body.style.setProperty('--mouse-y', e.clientY + 'px');
 });
+
+// --- ONE PIECE THEME TOGGLE ---
+function toggleOnePieceTheme() {
+  document.body.classList.toggle('one-piece-theme');
+  
+  // Create a cool transition effect
+  const isOnePiece = document.body.classList.contains('one-piece-theme');
+  const avatar = document.getElementById('luffy-avatar');
+  
+  if (isOnePiece) {
+    if (avatar) {
+      avatar.style.transform = 'scale(1.25) rotate(-5deg)';
+      avatar.style.filter = 'drop-shadow(0 0 20px #facc15)';
+    }
+  } else {
+    if (avatar) {
+      avatar.style.transform = 'scale(1.15) rotate(0deg)';
+      avatar.style.filter = 'none';
+    }
+  }
+}

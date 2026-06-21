@@ -80,6 +80,34 @@
   --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+body.one-piece-theme {
+  /* ONE PIECE THEME: PIRATE NAVY, JOLLY ROGER WHITE & GOLD */
+  --bg-color: #050b14;
+  --bg-dots: rgba(250, 204, 21, 0.05); /* subtle gold dots */
+  --panel-bg: rgba(14, 23, 38, 0.7); /* translucent navy */
+  --panel-border: rgba(250, 204, 21, 0.2);
+  --panel-border-hover: rgba(250, 204, 21, 0.45);
+  
+  --sidebar-bg-color: rgba(9, 16, 28, 0.75);
+
+  --panel-glare: linear-gradient(135deg, rgba(250, 204, 21, 0.15) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0) 70%);
+  --inner-shadow: inset 0 1px 1px rgba(250, 204, 21, 0.15);
+
+  --primary-glow: radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.1) 0%, transparent 60%);
+  --secondary-glow: radial-gradient(circle at 80% 20%, rgba(220, 38, 38, 0.1) 0%, transparent 50%);
+
+  --primary: #facc15; /* straw hat gold */
+  --primary-hover: #eab308;
+  --primary-gradient: linear-gradient(135deg, rgba(250, 204, 21, 0.8) 0%, rgba(202, 138, 4, 0.8) 100%);
+  
+  --accent: #dc2626; /* luffy red */
+  --accent-gradient: linear-gradient(135deg, rgba(220, 38, 38, 0.8) 0%, rgba(185, 28, 28, 0.8) 100%);
+  
+  --text-primary: #fefce8; /* bright white/yellowish */
+  --text-secondary: #fef08a; /* yellowish gray */
+  --text-muted: #a1a1aa;
+}
+
 body.light-theme {
   /* LIGHT MODE: RED & WHITE WITH TRANSLUCENT SHADES & HIGHER RED SPECS */
   --bg-color: #ffffff;
